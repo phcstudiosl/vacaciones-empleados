@@ -54,8 +54,8 @@ document.getElementById("adminLink").style.display = "block";
 await cargarMisVacaciones();
 
 } catch (error) {
-console.error(error);
-alert("Error al iniciar sesión");
+  console.error(error);
+  alert(error.code + " - " + error.message);
 }
 };
 
