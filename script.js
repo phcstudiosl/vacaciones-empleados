@@ -17,13 +17,12 @@ doc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCfsaoePqf5xWewNTBV6PmF5cNXWNUy-mk",
-authDomain: "vacaciones-empleados.firebaseapp.com",
-projectId: "vacaciones-empleados",
-storageBucket: "vacaciones-empleados.firebasestorage.app",
-messagingSenderId: "977710909114",
-appId: "1:977710909114:web:9d2a0c63d67e2a0e60e483",
-measurementId: "G-TNKLJR8W12"
+  apiKey: "AIzaSyA4Us97wrmB3ejRL0ZLbWDLBoQLeHWLcmI",
+  authDomain: "vacaciones-empleados-70799.firebaseapp.com",
+  projectId: "vacaciones-empleados-70799",
+  storageBucket: "vacaciones-empleados-70799.firebasestorage.app",
+  messagingSenderId: "381217960651",
+  appId: "1:381217960651:web:2e9c8d8646fb813c39e14e"
 };
 
 const app = initializeApp(firebaseConfig);
