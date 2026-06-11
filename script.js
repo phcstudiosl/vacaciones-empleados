@@ -13,7 +13,9 @@ getDocs,
 query,
 where,
 updateDoc,
-doc
+doc,
+getDoc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -30,33 +32,92 @@ console.log(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+async function esAdmin(uid){
 
-const ADMIN_EMAILS = [
-  "phcstudiosl@gmail.com"
-];
+const userRef = doc(db,"users",uid);
+
+const userSnap = await getDoc(userRef);
+
+
+if(!userSnap.exists()){
+return false;
+}
+
+
+return userSnap.data().role === "admin";
+
+}
+;
 
 // =========================
 // LOGIN GOOGLE
 // =========================
 window.loginGoogle = async () => {
+
 try {
 
 const result = await signInWithPopup(auth, provider);
 
-document.getElementById("usuario").innerHTML =
-"Conectado como: " + result.user.email;
+const user = result.user;
 
-// mostrar admin link
-if (ADMIN_EMAILS.includes(result.user.email)) {
-document.getElementById("adminLink").style.display = "block";
+
+const userRef = doc(db,"users",user.uid);
+
+const userSnap = await getDoc(userRef);
+
+
+
+if(!userSnap.exists()){
+
+await setDoc(userRef,{
+
+email:user.email,
+
+name:user.displayName,
+
+role:"employee",
+
+barId:"bar1"
+
+});
+
 }
+
+
+
+document.getElementById("usuario").innerHTML =
+"Conectado como: " + user.email;
+
+
+
+if(await esAdmin(user.uid)){
+
+const admin =
+document.getElementById("adminLink");
+
+
+if(admin){
+
+admin.style.display="block";
+
+}
+
+}
+
+
 
 await cargarMisVacaciones();
 
-} catch (error) {
-  console.error(error);
-  alert(error.code + " - " + error.message);
+
+
+}catch(error){
+
+console.error(error);
+
+alert(error.code+" - "+error.message);
+
 }
+
 };
 
 
@@ -132,19 +193,38 @@ lista.appendChild(li);
 // =========================
 // AUTH STATE
 // =========================
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, async (user)=>{
 
-if (user) {
+
+if(user){
+
 
 document.getElementById("usuario").innerHTML =
 "Conectado como: " + user.email;
 
-// mostrar admin si es admin
-if (ADMIN_EMAILS.includes(user.email)) {
-document.getElementById("adminLink").style.display = "block";
+
+
+if(await esAdmin(user.uid)){
+
+
+const admin =
+document.getElementById("adminLink");
+
+
+if(admin){
+
+admin.style.display="block";
+
 }
 
-await cargarMisVacaciones();
 }
+
+
+
+await cargarMisVacaciones();
+
+
+}
+
 
 });
