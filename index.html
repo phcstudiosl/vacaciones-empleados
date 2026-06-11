@@ -1,70 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Vacaciones</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vacaciones Empleados</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>Portal de Vacaciones</h1>
+<div class="header">
+<h1>🍸 Gestión de Vacaciones</h1>
+<p id="usuario">No conectado</p>
+</div>
 
-    <div class="card">
 
-        <h2>Acceso</h2>
+<div class="card">
 
-        <button onclick="loginGoogle()">
-            Iniciar sesión con Google
-        </button>
+<button onclick="loginGoogle()" class="btn">
+Entrar con Google
+</button>
 
-        <p id="usuario">
-            No has iniciado sesión
-        </p>
+<div id="adminLink" style="display:none">
 
-        <div id="adminLink" style="display:none;">
-            <a href="admin.html">
-                Panel de Administración
-            </a>
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Solicitar vacaciones</h2>
-
-        <label>Fecha inicio</label>
-        <br>
-        <input type="date" id="inicio">
-
-        <br><br>
-
-        <label>Fecha fin</label>
-        <br>
-        <input type="date" id="fin">
-
-        <br><br>
-
-        <button onclick="guardarVacaciones()">
-            Enviar solicitud
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Mis solicitudes</h2>
-
-        <ul id="lista"></ul>
-
-    </div>
+<a href="admin.html" class="btn admin">
+Panel Administración
+</a>
 
 </div>
 
+</div>
+
+
+
+<div class="card">
+
+<h2>Solicitar vacaciones</h2>
+
+
+<label>Desde</label>
+<input id="inicio" type="date">
+
+
+<label>Hasta</label>
+<input id="fin" type="date">
+
+
+<button onclick="guardarVacaciones()" class="btn">
+Enviar solicitud
+</button>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h2>Mis solicitudes</h2>
+
+<ul id="lista"></ul>
+
+</div>
+
+
+</div>
+
+
 <script type="module" src="script.js"></script>
+
 
 </body>
 </html>
